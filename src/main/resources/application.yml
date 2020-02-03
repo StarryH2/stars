@@ -1,8 +1,16 @@
-server:
-  port: 8887
+#server:
+ # port: 8887
 
-github:
-  client:
-    id: 442c04c44023f7f4e65c
-    secret: 9442371fa968cf328a2fffb698c4e0360b7025e2
-    uri: http://localhost:8887/callback
+#github:
+ # client:
+  #  id: 442c04c44023f7f4e65c
+   # secret: 9442371fa968cf328a2fffb698c4e0360b7025e2
+    #uri: http://localhost:8887/callback
+
+#h2连接池
+#spring:
+ # datasource:
+  #  url: jdbc:h2:F:/DB/h2/stars
+   # username: sa
+    #password: 123
+    #driver-class-name: org.h2.Driver

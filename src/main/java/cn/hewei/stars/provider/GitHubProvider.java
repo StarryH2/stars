@@ -31,8 +31,6 @@ public class GitHubProvider {
         try (Response response = client.newCall(request).execute()) {
             String str = response.body().string();
             String token = str.split("&")[0].split("=")[1];
-
-            System.out.println("测试1-"+token);
             return token;
         } catch (Exception e) {
             return null;
