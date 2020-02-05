@@ -1,6 +1,6 @@
 package cn.hewei.stars.controller;
 
-import cn.hewei.stars.dto.AccessTokenDTD;
+import cn.hewei.stars.dto.AccessTokenDTO;
 import cn.hewei.stars.dto.GitHubUser;
 import cn.hewei.stars.mapper.UserMapper;
 import cn.hewei.stars.model.User;
@@ -37,20 +37,20 @@ public class AuthorizeController {
     @Value("${github.client.uri}")
     private String uri;
 
+    //用户点击登陆 使用GitHub
     @GetMapping("/callback")
     public String callback(@RequestParam(name = "code")String code,
                            @RequestParam(name = "state")String state,
                            HttpServletResponse response){
-        AccessTokenDTD accessTokenDTD = new AccessTokenDTD();
-        accessTokenDTD.setClient_id(clientId);
-        accessTokenDTD.setClient_secret(secret);
-        accessTokenDTD.setCode(code);
-        accessTokenDTD.setRedirect_uri(uri);
-        accessTokenDTD.setState(state);
-        String accessToken = gitHubProvider.getAccessToken(accessTokenDTD);
+        AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
+        accessTokenDTO.setClient_id(clientId);
+        accessTokenDTO.setClient_secret(secret);
+        accessTokenDTO.setRedirect_uri(uri);
+        accessTokenDTO.setCode(code);
+        accessTokenDTO.setState(state);
+        String accessToken = gitHubProvider.getAccessToken(accessTokenDTO);
         GitHubUser gitHubUser = gitHubProvider.getUser(accessToken);
-        if (gitHubUser!=null){
-
+        if (gitHubUser!=null && gitHubUser.getId()!=null){
             User user = new User();
             String token = UUID.randomUUID().toString();
             user.setToken(token);
@@ -58,6 +58,8 @@ public class AuthorizeController {
             user.setAccountId(String.valueOf(gitHubUser.getId()));
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
+            user.setBio(gitHubUser.getBio());
+            user.setAvatarUrl(gitHubUser.getAvatar_url());
 
             userMapper.insert(user);
             //登陆成功 写 cookie 和 session

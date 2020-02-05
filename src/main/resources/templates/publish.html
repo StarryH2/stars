@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>讨论社区</title>
+    <title>发布 - 讨论社区</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link href="css/stars.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/stars.css">
     <script src="js/jquery-3.4.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
+<!--    <script src="js/stars.js"></script>-->
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -18,7 +18,7 @@
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">讨论社区</span>
             </button>
-            <a class="navbar-brand" href="#">讨论社区</a>
+            <a class="navbar-brand" href="/">讨论社区</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -31,9 +31,6 @@
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li th:if="${session.user!=null}">
-                    <a href="/publish">发布</a>
-                </li>
                 <li class="dropdown" th:if="${session.user != null}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="${session.user.name}">
                         <span class="caret"></span></a>
@@ -49,32 +46,39 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-
+<div class="alert alert-danger alert-dismissible" role="alert" th:if="${error}">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>错误信息</strong> <span th:text="${error}"></span>
+</div>
 <div class="container-fluid main">
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
-            <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-                发现
+            <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                发起
             </h2>
             <hr>
-
-            <div class="media" th:each="question : ${questions}">
-                <div class="media-left">
-                    <a href="/">
-                        <img class="img-rounded" th:src="${question.user.avatarUrl}">
-                    </a>
+            <form id="question_form" th:action="@{/publish}" method="post">
+                <div class="form-group">
+                    <label for="title">问题标题 (简单概要)：</label>
+                    <input type="text" class="form-control" th:value="${title}" name="title" id="title" placeholder="问题标题...">
                 </div>
-                <div class="media-body">
-                    <h4 class="media-heading" th:text="${question.title}"></h4>
-                    <span th:text="${question.description}"></span>
-                    <span class="text-desc"> • [[${question.commentCount}]] 个回复  • [[${question.viewCount}]] 次浏览  • [[${#dates.format(question.gmtCreate,'MM月dd日 yyyy年')}]] </span>
-
+                <div class="form-group">
+                    <label for="description">问题补充 (简单概要)：</label>
+                    <textarea th:text="${description}" name="description" id="description" class="form-control" cols="30" rows="10"></textarea>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="tag">添加标签：</label>
+                    <input type="text" th:value="${tag}" name="tag" class="form-control" id="tag" placeholder="输入标签...">
+                </div>
 
+                <button type="submit" class="btn btn-success btn-publish">发布</button>
+            </form>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-            <h2 style="font-weight: bold">热门话题</h2>
+            <h2 style="font-weight: bold">问题发起指南</h2>
+            • 问题标题:请用精简的语言描述您发布的问题，不超过25字<br>
+            • 问题补充:详细补充您的问题内容，并确保问题描述清晰直观，并提供一些相关的资料<br>
+            • 选择标签:选择一个或者多个合适的标签，用逗号隔开，不超过10个字<br>
         </div>
     </div>
 </div>

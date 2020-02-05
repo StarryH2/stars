@@ -1,6 +1,6 @@
 package cn.hewei.stars.provider;
 
-import cn.hewei.stars.dto.AccessTokenDTD;
+import cn.hewei.stars.dto.AccessTokenDTO;
 import cn.hewei.stars.dto.GitHubUser;
 import com.alibaba.fastjson.JSON;
 import okhttp3.*;
@@ -17,13 +17,13 @@ import java.io.IOException;
 @Component
 public class GitHubProvider {
 
-    public String getAccessToken(AccessTokenDTD accessTokenDTD){
+    public String getAccessToken(AccessTokenDTO accessTokenDTO){
         MediaType mediaType
                 = MediaType.get("application/json; charset=utf-8");
 
         OkHttpClient client = new OkHttpClient();
 
-        RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(accessTokenDTD));
+        RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(accessTokenDTO));
         Request request = new Request.Builder()
                 .url("https://github.com/login/oauth/access_token")
                 .post(body)
