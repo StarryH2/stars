@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common::header('讨论社区')}">
+    <meta charset="UTF-8">
+</head>
+<body>
+<!-- 插入碎片 -->
+<div th:insert="~{navigation :: nav}"></div>
+<div class="jumbotron">
+    <h1>出错了！！！</h1>
+    <p th:text="${messages}"></p>
+    <p><a class="btn btn-primary btn-lg" href="/" role="button">回到主页</a></p>
+</div>
+</body>
+</html>

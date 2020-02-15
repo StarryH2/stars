@@ -1,0 +1,36 @@
+package cn.hewei.stars.enums;
+
+/**
+ * @Author 何为
+ * @Daet 2020-02-15 14:59
+ * @Description
+ */
+public enum NotificationTypeEnum {
+    REPLY_QUESTION(1,"回复了问题"),
+    REPLY_COMMENT(2,"回复了评论");
+
+    private int type;
+    private String name;
+
+    NotificationTypeEnum(int type, String name) {
+        this.type = type;
+        this.name = name;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public static  String nameOfType(int type){
+        for (NotificationTypeEnum notificationTypeEnum : NotificationTypeEnum.values()) {
+            if (notificationTypeEnum.getType() == 1){
+                return notificationTypeEnum.getName();
+            }
+        }
+        return "";
+    }
+}

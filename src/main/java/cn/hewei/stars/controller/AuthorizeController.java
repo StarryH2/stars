@@ -5,6 +5,7 @@ import cn.hewei.stars.dto.GitHubUser;
 import cn.hewei.stars.mapper.UserMapper;
 import cn.hewei.stars.model.User;
 import cn.hewei.stars.provider.GitHubProvider;
+import cn.hewei.stars.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
@@ -27,8 +29,11 @@ public class AuthorizeController {
     @Autowired
     private GitHubProvider gitHubProvider;
 
-    @Resource
+    @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private UserService userService;
 
     @Value("${github.client.id}")
     private String clientId;
@@ -56,12 +61,11 @@ public class AuthorizeController {
             user.setToken(token);
             user.setName(gitHubUser.getName());
             user.setAccountId(String.valueOf(gitHubUser.getId()));
-            user.setGmtCreate(System.currentTimeMillis());
-            user.setGmtModified(user.getGmtCreate());
+
             user.setBio(gitHubUser.getBio());
             user.setAvatarUrl(gitHubUser.getAvatar_url());
 
-            userMapper.insert(user);
+            userService.createOrUpdate(user);
             //登陆成功 写 cookie 和 session
             //request.getSession().setAttribute("user",gitHubUser);
             response.addCookie(new Cookie("token",token));
@@ -70,7 +74,22 @@ public class AuthorizeController {
             //登陆失败
             return "redirect:/";
         }
+    }
 
+    /**
+     * @param request
+     * @return
+     * 退出登陆
+     * 移除session和cookie
+     */
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request,
+                         HttpServletResponse response){
+        request.getSession().removeAttribute("user");
+        Cookie cookie = new Cookie("token", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
     }
 
 }

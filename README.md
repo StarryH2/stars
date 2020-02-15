@@ -6,17 +6,17 @@
 
 ##**工具**
 
-[bootstrap]{https://v3.bootcss.com/}
+[bootstrap](https://v3.bootcss.com/)
 
-[spring 文档]{https://spring.io/guides}
+[spring 文档](https://spring.io/guides)
 
-[Git]{https://git-scm.com/download}
+[Git](https://git-scm.com/download)
 
-[Visual Paradiam]{https://www.visual-paradigm.com}
+[Visual Paradiam](https://www.visual-paradigm.com)
 
-[flyway] {https://flywaydb.org/getstarted/firststeps/maven}
+[flyway] (https://flywaydb.org/getstarted/firststeps/maven)
 
-[lombox] {https://projectlombok.org/setup/maven}
+[lombox] (https://projectlombok.org/setup/maven)
 ##**脚本**
 `sql
 CREATE CACHED TABLE USER(
@@ -29,6 +29,17 @@ CREATE CACHED TABLE USER(
 )
 `
 
-`
+```bash
     mvn flyway:migrate
-`
+    mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
+
+
+    git status
+    git add .
+    git commit -m ""
+    git push
+    /
+    git add .
+    git status
+    git commit --amend --no-edit
+```

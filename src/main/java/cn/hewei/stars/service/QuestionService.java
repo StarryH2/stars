@@ -1,12 +1,9 @@
 package cn.hewei.stars.service;
 
+import cn.hewei.stars.dto.PaginationDTO;
 import cn.hewei.stars.dto.QuestionDTO;
-import cn.hewei.stars.mapper.QuestionMapper;
-import cn.hewei.stars.mapper.UserMapper;
 import cn.hewei.stars.model.Question;
-import cn.hewei.stars.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,5 +15,16 @@ import java.util.List;
 
 public interface QuestionService {
 
-    List<QuestionDTO> queryQuestions();
+
+    PaginationDTO queryQuestions(Integer page, Integer size);
+
+    PaginationDTO queryQuestionsByUserId(Long userId, Integer page, Integer size);
+
+    QuestionDTO getById(Long id);
+
+    void createOrUpdate(Question question);
+
+    void incView(Long id);
+
+    List<QuestionDTO> selectRelated(QuestionDTO questionDTO);
 }
