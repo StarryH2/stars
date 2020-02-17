@@ -3,6 +3,7 @@ package cn.hewei.stars.interceptor;
 import cn.hewei.stars.mapper.UserMapper;
 import cn.hewei.stars.model.User;
 import cn.hewei.stars.model.UserExample;
+import cn.hewei.stars.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,9 @@ public class SessionInterceptor implements HandlerInterceptor {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private NotificationService notificationService;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //获取浏览器所有cookie
@@ -45,6 +49,8 @@ public class SessionInterceptor implements HandlerInterceptor {
                     if (users.size()!=0){
                         //在导航栏右上角显示用户信息
                         request.getSession().setAttribute("user",users.get(0));
+                        Long unreadCount = notificationService.unreadCount(users.get(0).getId());
+                        request.getSession().setAttribute("unreadMessage",unreadCount);
                     }
                     break;
                 }
