@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
             //插入
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
-            userMapper.insert(user);
+            userMapper.insertSelective(user);
         }else {
             User dbUser = users.get(0);
             User updateUser = new User();

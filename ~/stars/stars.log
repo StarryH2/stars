@@ -1,0 +1,38 @@
+2020-02-19 18:17:16.662  INFO 8248 --- [restartedMain] cn.hewei.stars.StarsApplication          : Starting StarsApplication on DESKTOP-FL22560 with PID 8248 (F:\Review\SpringBootTask\stars\target\classes started by ASUS1 in F:\Review\SpringBootTask\stars)
+2020-02-19 18:17:16.662  INFO 8248 --- [restartedMain] cn.hewei.stars.StarsApplication          : No active profile set, falling back to default profiles: default
+2020-02-19 18:17:17.484  INFO 8248 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8887 (http)
+2020-02-19 18:17:17.485  INFO 8248 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-02-19 18:17:17.485  INFO 8248 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.30]
+2020-02-19 18:17:17.577  INFO 8248 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-02-19 18:17:17.577  INFO 8248 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 912 ms
+2020-02-19 18:17:17.592  INFO 8248 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2020-02-19 18:17:17.600  INFO 8248 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2020-02-19 18:17:17.601  INFO 8248 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:F:/DB/h2/stars'
+2020-02-19 18:17:18.118  INFO 8248 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-02-19 18:17:18.136  INFO 8248 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-02-19 18:17:18.226  INFO 8248 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-02-19 18:17:18.242  INFO 8248 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8887 (http) with context path ''
+2020-02-19 18:17:18.243  INFO 8248 --- [restartedMain] cn.hewei.stars.StarsApplication          : Started StarsApplication in 1.753 seconds (JVM running for 2938.589)
+2020-02-19 18:17:18.246  INFO 8248 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2020-02-19 18:17:45.798  INFO 8248 --- [Thread-18] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-02-19 18:17:45.801  INFO 8248 --- [Thread-18] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2020-02-19 18:17:46.012  INFO 8248 --- [Thread-18] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2020-02-19 18:17:46.575  INFO 8248 --- [restartedMain] cn.hewei.stars.StarsApplication          : Starting StarsApplication on DESKTOP-FL22560 with PID 8248 (F:\Review\SpringBootTask\stars\target\classes started by ASUS1 in F:\Review\SpringBootTask\stars)
+2020-02-19 18:17:46.575  INFO 8248 --- [restartedMain] cn.hewei.stars.StarsApplication          : No active profile set, falling back to default profiles: default
+2020-02-19 18:17:46.991  INFO 8248 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8887 (http)
+2020-02-19 18:17:46.992  INFO 8248 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-02-19 18:17:46.993  INFO 8248 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.30]
+2020-02-19 18:17:47.021  INFO 8248 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-02-19 18:17:47.021  INFO 8248 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 443 ms
+2020-02-19 18:17:47.042  INFO 8248 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2020-02-19 18:17:47.048  INFO 8248 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2020-02-19 18:17:47.049  INFO 8248 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:F:/DB/h2/stars'
+2020-02-19 18:17:47.186  INFO 8248 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-02-19 18:17:47.198  INFO 8248 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-02-19 18:17:47.277  INFO 8248 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-02-19 18:17:47.292  INFO 8248 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8887 (http) with context path ''
+2020-02-19 18:17:47.292  INFO 8248 --- [restartedMain] cn.hewei.stars.StarsApplication          : Started StarsApplication in 0.756 seconds (JVM running for 2967.638)
+2020-02-19 18:17:47.293  INFO 8248 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2020-02-19 18:18:42.926  INFO 8248 --- [Thread-23] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-02-19 18:18:42.927  INFO 8248 --- [Thread-23] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2020-02-19 18:18:42.961  INFO 8248 --- [Thread-23] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.

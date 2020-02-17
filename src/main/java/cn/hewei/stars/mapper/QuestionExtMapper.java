@@ -1,5 +1,6 @@
 package cn.hewei.stars.mapper;
 
+import cn.hewei.stars.dto.QuestionQueryDTO;
 import cn.hewei.stars.model.Question;
 import cn.hewei.stars.model.QuestionExample;
 import org.apache.ibatis.annotations.Param;
@@ -14,4 +15,8 @@ public interface QuestionExtMapper {
     int incCommentCount(Question question);
 
     List<Question> selectRelated(Question question);
+
+    Integer countBySearch(QuestionQueryDTO questionQueryDTO);
+
+    List<Question> selectBySearch(QuestionQueryDTO questionQueryDTO);
 }

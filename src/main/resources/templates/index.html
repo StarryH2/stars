@@ -7,7 +7,6 @@
     window.onload = function () {
         var closable = window.localStorage.getItem("closable");
         if (closable == "true"){
-            alert(111)
             window.close();
             window.localStorage.removeItem("closable");
         }
@@ -34,7 +33,7 @@
                     <h4 class="media-heading" style="font-weight: bold;color: #155faa">
                         <a th:href="@{'/question/'+${question.id}}"  th:text="${question.title}"></a>
                     </h4>
-                    <span th:text="${question.description}"></span><br>
+                    <br>
                     <span class="text-desc"> • [[${question.commentCount}]] 个回复  • [[${question.viewCount}]] 次浏览  • [[${#dates.format(question.gmtCreate,'MM月dd日 yyyy年')}]] </span>
 
                 </div>
@@ -42,40 +41,41 @@
             <nav aria-label="Page navigation">
                 <ul class="pagination">
                     <li th:if="${paginationDTO.showPrevious}">
-                        <a th:href="@{/(page=1)}" aria-label="Previous">
+                        <a th:href="@{/(page=1,search=${search})}" aria-label="Previous">
                             <span aria-hidden="true" class="glyphicon glyphicon-arrow-left"></span>
                         </a>
                     </li>
                     <li th:if="${paginationDTO.showFirstPage}">
-                        <a th:href="@{/(page=${paginationDTO.page-1>0?paginationDTO.page-1:1})}" aria-label="Previous">
+                        <a th:href="@{/(page=${paginationDTO.page-1>0?paginationDTO.page-1:1},search=${search})}" aria-label="Previous">
                             <span aria-hidden="true"   class="glyphicon glyphicon-menu-left"></span>
                         </a>
                     </li>
 
                     <li th:each="page : ${paginationDTO.pages}" th:class="${paginationDTO.page==page}?'active':''">
-                        <a th:href="@{/(page=${page})}" th:text="${page}"></a>
+                        <a th:href="@{/(page=${page},search=${search})}" th:text="${page}"></a>
                     </li>
 
                     <li th:if="${paginationDTO.showNext}">
-                        <a th:href="@{/(page=${paginationDTO.page+1<=paginationDTO.totalPage?paginationDTO.page+1:paginationDTO.totalPage})}" aria-label="Previous">
+                        <a th:href="@{/(page=${paginationDTO.page+1<=paginationDTO.totalPage?paginationDTO.page+1:paginationDTO.totalPage},search=${search})}" aria-label="Previous">
                             <span aria-hidden="true" class="glyphicon glyphicon-menu-right"></span>
                         </a>
                     </li>
                     <li th:if="${paginationDTO.showEndPage}">
-                        <a th:href="@{/(page=${paginationDTO.totalPage})}" aria-label="Previous">
+                        <a th:href="@{/(page=${paginationDTO.totalPage},search=${search})}" aria-label="Previous">
                             <span aria-hidden="true" class="glyphicon glyphicon-arrow-right"></span>
                         </a>
                     </li>
 
                 </ul>
             </nav>
-
-
         </div>
+
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
             <h2 style="font-weight: bold">热门话题</h2>
+
         </div>
     </div>
 </div>
+<div th:insert="~{footer :: foot}"></div>
 </body>
 </html>

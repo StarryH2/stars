@@ -3,6 +3,7 @@ package cn.hewei.stars.service.impl;
 import cn.hewei.stars.dto.NotificationDTO;
 import cn.hewei.stars.dto.PaginationDTO;
 import cn.hewei.stars.dto.QuestionDTO;
+import cn.hewei.stars.dto.QuestionQueryDTO;
 import cn.hewei.stars.exception.CustomizeErrorCode;
 import cn.hewei.stars.exception.CustomizeException;
 import cn.hewei.stars.mapper.QuestionExtMapper;
@@ -18,6 +19,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.transform.Source;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,11 +41,20 @@ public class QuestionServiceImpl implements QuestionService {
     private QuestionExtMapper questionExtMapper;
 
     @Override
-    public PaginationDTO queryQuestions(Integer page, Integer size) {
+    public PaginationDTO queryQuestions(String search,Integer page, Integer size) {
+        //如歌tag为空 就返回空
+        if (StringUtils.isNoneBlank(search)){
+            String[] tags = StringUtils.split(search, " ");
+            search = Arrays.stream(tags).collect(Collectors.joining("|"));
+        }
+
+
         //分页数据
         PaginationDTO paginationDTO = new PaginationDTO();
         //所有的数量
-        Integer totalCount =(int) questionMapper.countByExample(new QuestionExample());
+        QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
+        questionQueryDTO.setSearch(search);
+        Integer totalCount = questionExtMapper.countBySearch(questionQueryDTO);
         paginationDTO.setPagination(totalCount,page,size);
         //预防用户在网页输入页数出现问题进行判断
         if (page<1){
@@ -61,8 +72,9 @@ public class QuestionServiceImpl implements QuestionService {
         //查询社区用户的发现-分页
         QuestionExample questionExample = new QuestionExample();
         questionExample.setOrderByClause("GMT_CREATE DESC");
-        List<Question> questions = questionMapper.selectByExampleWithBLOBsWithRowbounds(
-                questionExample, new RowBounds(offset, size));
+        questionQueryDTO.setSize(size);
+        questionQueryDTO.setPage(offset);
+        List<Question> questions = questionExtMapper.selectBySearch(questionQueryDTO);
         //遍历 questions
         for (Question question : questions) {
             //通过 question.getId 查询 User
@@ -169,7 +181,7 @@ public class QuestionServiceImpl implements QuestionService {
             question.setViewCount(0);
             question.setLikeCount(0);
             question.setCommentCount(0);
-            questionMapper.insert(question);
+            questionMapper.insertSelective(question);
         }else {
             //更新
             Question updateQuestion = new Question();

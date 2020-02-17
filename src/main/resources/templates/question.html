@@ -21,7 +21,16 @@
                     阅读数：[[${questionDTO.viewCount}]]
                 </span>
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:text="${questionDTO.description}"></div>
+                <!--内容-->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="question-view">
+                    <textarea style="display: none" th:text="${questionDTO.description}">
+                    </textarea>
+                </div>
+                <script type="text/javascript">
+                    $(function() {
+                        editormd.markdownToHTML("question-view",{});
+                    });
+                </script>
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <!--标签-->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question-tag-div">
@@ -90,12 +99,12 @@
                     <div class="media">
                         <div class="media-left">
                             <a href="/">
-                                <img class="img-rounded" th:src="${questionDTO.user.avatarUrl}">
+                                <img class="img-rounded" th:src="${session.user != null? session.user.avatarUrl : '/images/default.png' }">
                             </a>
                         </div>
                         <div class="media-body">
                             <h5 class="media-heading">
-                                [[${questionDTO.user.name}]]
+                                [[${session.user != null? session.user.name : '匿名用户'}]]
                             </h5>
                         </div>
                     </div>
@@ -126,7 +135,7 @@
             <!--广告位-->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h3 style="font-weight: bolder">站长微信</h3>
-                    <img src="/image/WebmasterWeChat.png" class="img-thumbnail question-advertising">
+                    <img src="/images/WebmasterWeChat.png" class="img-thumbnail question-advertising">
                 </ul>
             </div>
             <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -141,5 +150,6 @@
         </div>
     </div>
 </div>
+<div th:insert="~{footer :: foot}"></div>
 </body>
 </html>

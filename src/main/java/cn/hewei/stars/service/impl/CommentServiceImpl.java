@@ -58,7 +58,7 @@ public class CommentServiceImpl implements CommentService {
                 throw  new CustomizeException(CustomizeErrorCode.COMMENT_NOT_FOUND);
             }
             //回复问题
-            Question question = questionMapper.selectByPrimaryKey(commnet.getParentId());
+            Question question = questionMapper.selectByPrimaryKey(dbComment.getParentId());
             if (question == null){
                 throw  new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
@@ -72,13 +72,14 @@ public class CommentServiceImpl implements CommentService {
 
             //评论提示
             //创建通知
-            createNotify(commnet, dbComment.getCommentator(), commentator.getName(), commentator.getName(), NotificationTypeEnum.REPLY_COMMENT,question.getId());
+            createNotify(commnet, dbComment.getCommentator(), commentator.getName(), question.getTitle(), NotificationTypeEnum.REPLY_COMMENT,question.getId());
         }else {
             //回复问题
             Question question = questionMapper.selectByPrimaryKey(commnet.getParentId());
             if (question == null){
                 throw  new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
+            commnet.setCommentCount(0);
             commentMapper.insert(commnet);
             question.setCommentCount(1);
             questionExtMapper.incCommentCount(question);
@@ -88,6 +89,10 @@ public class CommentServiceImpl implements CommentService {
     }
 
     private void createNotify(Comment commnet, Long receiver,String notifierName, String outerTitle,  NotificationTypeEnum notificationType,Long outerId) {
+        //防止自己通知自己
+        if (receiver.equals(commnet.getCommentator()) || receiver == commnet.getCommentator()){
+            return;
+        }
         Notification notification = new Notification();
         notification.setGmtCreate(System.currentTimeMillis());
         notification.setType(notificationType.getType());

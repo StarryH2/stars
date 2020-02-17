@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
 </head>
 <body>
+
 <!-- 插入碎片 -->
 <div th:insert="~{navigation :: nav}"></div>
-
 <div class="alert alert-danger alert-dismissible" role="alert" th:if="${error}">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <strong>错误信息</strong> <span th:text="${error}"></span>
@@ -24,10 +24,25 @@
                     <label for="title">问题标题 (简单概要)：</label>
                     <input type="text" class="form-control" th:value="${title}" name="title" id="title" placeholder="发布标题..." autocomplete="off">
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="question-editor">
                     <label for="description">问题补充 (简单概要)：</label>
-                    <textarea th:text="${description}" name="description" id="description" class="form-control" cols="30" rows="10"></textarea>
+                    <textarea th:text="${description}" name="description" id="description" class="form-control" cols="30" rows="10" style="display:none;"></textarea>
                 </div>
+                <script type="text/javascript">
+                    $(function() {
+                        var editor = editormd("question-editor", {
+                            width  : "100%",
+                            height : 350,
+                            path   : "/js/lib/",
+                            delay:0,
+                            watch:false,
+                            placeholder:"请输入问题描述",
+                            imageUpload    : true,
+                            imageFormats   : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                            imageUploadURL : "/files/upload",
+                        });
+                    });
+                </script>
                 <div class="form-group">
                     <label for="tag">添加标签：</label>
                     <input id="tag" type="text" th:value="${tag}" name="tag" class="form-control" placeholder="选择标签..." autocomplete="off" onclick="showTag()">
@@ -68,5 +83,6 @@
         </div>
     </div>
 </div>
+<div th:insert="~{footer :: foot}"></div>
 </body>
 </html>

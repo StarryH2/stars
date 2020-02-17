@@ -50,15 +50,11 @@ public class ProfileController {
             model.addAttribute("section","questions");
             model.addAttribute("sectionName","我的提问");
             PaginationDTO paginationDTO = questionService.queryQuestionsByUserId(user.getId(), page, size);
-            System.out.println(action);
-            System.out.println("测试-"+paginationDTO.getShowPrevious());
             model.addAttribute("paginationDTO",paginationDTO);
         }else if ("replies".equals(action)){
             PaginationDTO paginationDTO = notificationService.list(user.getId(),page,size);
-            Long unreadCount = notificationService.unreadCount(user.getId());
             model.addAttribute("section","replies");
             model.addAttribute("paginationDTO",paginationDTO);
-            model.addAttribute("unreadCount",unreadCount);
             model.addAttribute("sectionName","最新回复");
         }
 
