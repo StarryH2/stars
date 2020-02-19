@@ -6,6 +6,7 @@ import cn.hewei.stars.mapper.UserMapper;
 import cn.hewei.stars.model.User;
 import cn.hewei.stars.provider.GitHubProvider;
 import cn.hewei.stars.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ import java.util.UUID;
  * @Description
  */
 @Controller
+@Slf4j
 public class AuthorizeController {
 
     @Autowired
@@ -71,6 +73,7 @@ public class AuthorizeController {
             response.addCookie(new Cookie("token",token));
             return "redirect:/";
         }else {
+            log.error("callback get github error,{}",gitHubUser);
             //登陆失败
             return "redirect:/";
         }
