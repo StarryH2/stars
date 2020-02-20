@@ -65,7 +65,7 @@ public class QuestionServiceImpl implements QuestionService {
         }
 
         //分页
-        Integer offset = size * (page-1);
+        Integer offset = page<1 ? 0: size * (page-1);
 
         //创建QuestionDTO集合
         List<QuestionDTO> questionDTOs = new ArrayList<>();
