@@ -1,13 +1,13 @@
-DROP TABLE IF EXISTS `notification`;
-CREATE TABLE `notification` (
-  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `NOTIFIER` bigint(20) DEFAULT NULL,
-  `RECEIVER` bigint(20) DEFAULT NULL,
-  `OUTERID` bigint(20) DEFAULT NULL,
-  `TYPE` int(11) DEFAULT NULL,
-  `GMT_CREATE` bigint(20) DEFAULT NULL,
-  `STATUS` int(11) DEFAULT '0',
-  `NOTIFIER_NAME` varchar(100) DEFAULT NULL,
-  `OUTER_TITLE` varchar(256) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+drop table if exists `NOTIFICATION`;
+create table `NOTIFICATION` (
+  `id` bigint(20) not null auto_increment,
+  `notifier` bigint(20) default null,
+  `receiver` bigint(20) default null,
+  `outerid` bigint(20) default null,
+  `type` int(11) default null,
+  `gmt_create` bigint(20) default null,
+  `status` int(11) default '0',
+  `notifier_name` varchar(100) default null,
+  `outer_title` varchar(256) default null,
+  primary key (`id`)
 )

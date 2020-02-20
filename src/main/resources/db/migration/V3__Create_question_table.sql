@@ -1,14 +1,14 @@
-DROP TABLE IF EXISTS `question`;
-CREATE TABLE `question` (
-  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `TITLE` varchar(50) DEFAULT NULL,
-  `DESCRIPTION` text,
-  `GMT_CREATE` bigint(20) DEFAULT NULL,
-  `GMT_MODIFIED` bigint(20) DEFAULT NULL,
-  `CREATOR` bigint(20) DEFAULT NULL,
-  `COMMENT_COUNT` int(11) DEFAULT '0',
-  `VIEW_COUNT` int(11) NOT NULL DEFAULT '0',
-  `LIKE_COUNT` int(11) DEFAULT '0',
-  `TAG` varchar(256) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+drop table if exists `QUESTION`;
+create table `QUESTION` (
+  `id` bigint(20) not null auto_increment,
+  `title` varchar(50) default null,
+  `description` text,
+  `gmt_create` bigint(20) default null,
+  `gmt_modified` bigint(20) default null,
+  `creator` bigint(20) default null,
+  `comment_count` int(11) default '0',
+  `view_count` int(11) not null default '0',
+  `like_count` int(11) default '0',
+  `tag` varchar(256) default null,
+  primary key (`id`)
 )
