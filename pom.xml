@@ -122,12 +122,11 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>5.2.4</version>
                 <configuration>
-                    <url>jdbc:h2:F:/DB/h2/stars</url>
+                    <url>jdbc:h2:~/stars</url>
                     <user>sa</user>
                     <password>123</password>
                 </configuration>
                 <dependencies>
-
 
                     <dependency>
                         <groupId>com.h2database</groupId>
