@@ -118,11 +118,16 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>5.2.4</version>
                 <configuration>
-                    <url>jdbc:h2:~/stars</url>
-                    <user>sa</user>
-                    <password>123</password>
+                    <url>jdbc:mysql://10.9.153.234:3306/stars-shequ</url>
+                    <user>root</user>
+                    <password>hewei_root</password>
                 </configuration>
                 <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <scope>runtime</scope>
+                    </dependency>
 
                     <dependency>
                         <groupId>com.h2database</groupId>
